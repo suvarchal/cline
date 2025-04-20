@@ -1429,6 +1429,13 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 						placeholder={"e.g. 32768"}>
 						<span style={{ fontWeight: 500 }}>Model Context Window</span>
 					</VSCodeTextField>
+					<VSCodeTextField
+						value={apiConfiguration?.ollamaApiTimeoutSecs || "120"}
+						style={{ width: "100%" }}
+						onInput={handleInputChange("ollamaApiTimeoutSecs")}
+						placeholder={"e.g. 120"}>
+						<span style={{ fontWeight: 500 }}>Request Timeout (seconds)</span>
+					</VSCodeTextField>
 					{ollamaModels.length > 0 && (
 						<VSCodeRadioGroup
 							value={

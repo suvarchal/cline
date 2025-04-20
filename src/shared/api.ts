@@ -56,6 +56,7 @@ export interface ApiHandlerOptions {
 	ollamaModelId?: string
 	ollamaBaseUrl?: string
 	ollamaApiOptionsCtxNum?: string
+	ollamaApiTimeoutSecs?: string
 	lmStudioModelId?: string
 	lmStudioBaseUrl?: string
 	geminiApiKey?: string
