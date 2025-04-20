@@ -21,8 +21,12 @@ export class OllamaHandler implements ApiHandler {
 
 		try {
 			// Create a promise that rejects after timeout
+			const timeoutSeconds = this.options.ollamaTimeoutSeconds || 120 // Default to 120 seconds
 			const timeoutPromise = new Promise<never>((_, reject) => {
-				setTimeout(() => reject(new Error("Ollama request timed out after 30 seconds")), 30000)
+				setTimeout(
+					() => reject(new Error(`Ollama request timed out after ${timeoutSeconds} seconds`)),
+					timeoutSeconds * 1000,
+				)
 			})
 
 			// Create the actual API request promise
@@ -63,7 +67,8 @@ export class OllamaHandler implements ApiHandler {
 		} catch (error: any) {
 			// Check if it's a timeout error
 			if (error.message && error.message.includes("timed out")) {
-				throw new Error("Ollama request timed out after 30 seconds")
+				const timeoutSeconds = this.options.ollamaTimeoutSeconds || 120
+				throw new Error(`Ollama request timed out after ${timeoutSeconds} seconds`)
 			}
 
 			// Enhance error reporting
